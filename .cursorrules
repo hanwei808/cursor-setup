@@ -1,0 +1,190 @@
+# Cursor AI 规则文件
+# 项目：数据管理系统
+# 技术选型：Node.js + Express.js (后端), Vue3 + TypeScript + Ant Design Vue (前端), MySQL (数据库), RESTful API (接口)
+# 日期：2025年2月24日
+
+## 通用规则
+- 语言：所有代码和注释使用中文。
+- 编码风格：遵循 Airbnb JavaScript/TypeScript 风格指南，除非本规则另有说明。
+- 文件命名：小写字母，单词间用连字符（kebab-case），例如 `user-controller.ts`。
+- 提交信息：使用 Conventional Commits 规范，例如 `feat: add user authentication`, `fix: resolve login bug`。
+- 错误处理：所有异步操作必须包含 try-catch 或 .catch()，避免未处理的异常。
+
+## 项目结构
+- 根目录结构：
+/project-root
+├── /backend # 后端代码
+├── /frontend # 前端代码
+├── /docs # 项目文档
+├── /scripts # 脚本（如数据库迁移）
+└── README.md # 项目说明
+
+## 后端规则 (Node.js + Express.js)
+- 框架：使用 Express.js 构建 RESTful API。
+- 文件结构：
+/backend
+├── /src
+│ ├── /controllers # 控制器，处理 HTTP 请求
+│ ├── /services # 业务逻辑层，与数据库交互
+│ ├── /models # 数据模型，定义表结构
+│ ├── /routes # 路由定义
+│ ├── /middleware # 中间件（如认证、日志）
+│ ├── /config # 配置文件（如数据库连接）
+│ └── index.ts # 入口文件
+├── package.json
+└── tsconfig.json # TypeScript 配置
+
+- 代码风格：
+- 使用 TypeScript。
+- 控制器函数使用 async/await 语法。
+- 每个模块导出单一职责，例如 `export default class UserController {}`。
+- RESTful API 规范：
+- 端点命名：复数形式，例如 `/users`, `/orders`。
+- HTTP 方法：
+  - GET：获取资源，例如 `GET /users/:id`。
+  - POST：创建资源，例如 `POST /users`。
+  - PUT：更新资源，例如 `PUT /users/:id`。
+  - DELETE：删除资源，例如 `DELETE /users/:id`。
+- 返回格式：JSON，结构为 `{ success: boolean, data: any, message?: string, error?: string }`。
+- 状态码：
+  - 200：成功返回数据。
+  - 201：创建成功。
+  - 400：客户端错误。
+  - 404：资源未找到。
+  - 500：服务器错误。
+- 数据库交互：
+- ORM：使用 `Sequelize` 与 MySQL 交互（可选：如需轻量级，可选 `mysql2` + 手动 SQL）。
+- 模型定义：字段名使用下划线命名，例如 `first_name`, `created_at`。
+- 表名：复数形式，例如 `users`, `orders`。
+- 中间件：
+- 认证：使用 JWT（JSON Web Token），存储在 HTTP Authorization 头 (`Bearer <token>`)。
+- 日志：使用 `morgan` 记录请求日志。
+- ORM 选择：`Sequelize`（类型安全，支持复杂查询）
+- 文件结构分层：按功能分层（controllers, services, models）
+
+## 前端规则 (Vue3 + TypeScript + Ant Design Vue)
+- 框架：使用 Vue3 Composition API + TypeScript。
+- 文件结构：
+/frontend
+├── /src
+│ ├── /assets # 静态资源（图片、CSS）
+│ ├── /components # 可复用组件
+│ ├── /views # 页面组件
+│ ├── /router # 路由配置
+│ ├── /store # 状态管理（Pinia）
+│ ├── /api # API 请求封装
+│ ├── /types # TypeScript 类型定义
+│ ├── App.vue # 根组件
+│ └── main.ts # 入口文件
+├── vite.config.ts # Vite 配置
+└── package.json
+
+- 代码风格：
+- 使用 `<script setup>` 语法简化组件定义。
+- 组件名使用 PascalCase，例如 `UserList.vue`。
+- Props 和 Emits 使用 TypeScript 类型定义。
+- CSS：使用 `scoped` 样式，避免全局污染。
+- UI 组件库：
+- 使用 Ant Design Vue，提供一致的组件风格。
+- 自定义主题：通过 `vite-plugin-antdv` 配置（可选，默认使用 Ant Design Vue 默认主题）。
+- 状态管理：
+- 使用 Pinia 管理全局状态。
+- 每个模块一个 store 文件，例如 `userStore.ts`, `orderStore.ts`。
+- API 请求：
+- 使用 `axios` 封装 RESTful API 调用。
+- 请求文件：`/api/user.ts`, `/api/order.ts`，按模块组织。
+- 返回类型：定义接口，例如 `interface User { id: number; name: string; }`。
+- 路由：
+- 使用 `vue-router`，路由文件位于 `/router/index.ts`。
+- 路由命名：小写连字符，例如 `user-list`, `order-detail`。
+- 状态管理：Pinia（推荐，轻量且与 Vue3 集成良好）
+- CSS 方案：Scoped CSS、Scss
+
+## 数据库规则 (MySQL)
+- 设计规范：
+- 表名：复数形式，例如 `users`, `orders`。
+- 字段名：下划线命名，例如 `first_name`, `created_at`。
+- 主键：`id`，类型为 `BIGINT UNSIGNED`，自增。
+- 时间字段：`created_at`, `updated_at`，类型为 `DATETIME`，带有默认值 `CURRENT_TIMESTAMP`。
+- 外键：明确定义，例如 `user_id` 关联 `users(id)`。
+- 索引：
+- 频繁查询的字段添加索引，例如 `email`。
+- 复合索引用于多条件查询，例如 `INDEX (user_id, created_at)`。
+- 数据迁移：
+- 使用 `Sequelize CLI`（若使用 Sequelize）或自定义 SQL 脚本管理迁移。
+- 迁移文件存放于 `/scripts/migrations/`。
+
+## 测试规则
+- 后端：
+- 使用 `Jest` 编写单元测试。
+- 测试文件位于对应模块旁，例如 `/controllers/userController.test.ts`。
+- 前端：
+- 使用 `Vitest` 测试组件和逻辑。
+- 测试文件位于 `/tests/` 目录下。
+- 覆盖率：目标 80% 以上。
+
+## 构建与部署
+- 后端：
+- 使用 `ts-node` 开发，`tsc` 编译为 JavaScript。
+- 部署：PM2 或 Docker。
+- 前端：
+- 使用 Vite 构建。
+- 部署：静态文件托管（如 Nginx）。
+
+## 示例代码
+### 后端控制器 (/backend/src/controllers/userController.ts)
+```typescript
+import { Request, Response } from 'express';
+import UserService from '../services/userService';
+
+export default class UserController {
+static async getUser(req: Request, res: Response) {
+  try {
+    const userId = parseInt(req.params.id, 10);
+    const user = await UserService.findUserById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+    return res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+}
+}
+```
+### 前端组件 (/frontend/src/views/UserList.vue)
+```Vue
+<template>
+  <a-table :data-source="users" :columns="columns">
+    <template #name="{ record }">
+      <a>{{ record.name }}</a>
+    </template>
+  </a-table>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { getUsers } from '@/api/user';
+
+interface User {
+  id: number;
+  name: string;
+}
+
+const users = ref<User[]>([]);
+const columns = [
+  { title: 'ID', dataIndex: 'id', key: 'id' },
+  { title: 'Name', dataIndex: 'name', key: 'name', slots: { customRender: 'name' } },
+];
+
+onMounted(async () => {
+  users.value = await getUsers();
+});
+</script>
+
+<style scoped>
+.ant-table {
+  margin: 16px;
+}
+</style>
+```
