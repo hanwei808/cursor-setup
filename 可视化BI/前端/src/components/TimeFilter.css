@@ -1,0 +1,116 @@
+.time-filter {
+  background-color: var(--background-white);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.time-filter-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.time-filter-inputs {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex: 1;
+  min-width: 280px;
+}
+
+.time-filter-separator {
+  margin: 0 var(--spacing-md);
+  color: var(--text-tertiary);
+}
+
+.time-filter-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-left: auto;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.time-filter-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  min-width: 80px;
+}
+
+.time-filter-button:hover {
+  background-color: #0055b3;
+}
+
+.time-filter-button.reset {
+  background-color: var(--background-light);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.time-filter-button.reset:hover {
+  background-color: #e6e6e6;
+}
+
+.time-filter-button-icon {
+  margin-right: var(--spacing-xs);
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+  .time-filter {
+    flex-wrap: wrap;
+  }
+  
+  .time-filter-inputs {
+    order: 2;
+    width: 100%;
+    margin: var(--spacing-sm) 0;
+  }
+  
+  .time-filter-buttons {
+    order: 3;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .time-filter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .time-filter-label {
+    margin-bottom: var(--spacing-sm);
+    width: 100%;
+  }
+  
+  .time-filter-inputs {
+    margin-bottom: var(--spacing-md);
+    width: 100%;
+  }
+  
+  .time-filter-buttons {
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .time-filter-button {
+    flex: 1;
+    justify-content: center;
+  }
+} 

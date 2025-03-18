@@ -1,0 +1,23 @@
+.data-overview {
+  margin-bottom: 24px;
+}
+
+.data-overview .ant-card {
+  height: 100%;
+  transition: all 0.3s;
+}
+
+.data-overview .ant-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.data-overview .ant-statistic-title {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.data-overview .ant-statistic-content {
+  font-size: 24px;
+  font-weight: 600;
+} 

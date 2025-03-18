@@ -1,0 +1,26 @@
+.chart-section {
+  margin-bottom: 24px;
+}
+
+.chart-section .ant-tabs-nav {
+  margin-bottom: 16px;
+}
+
+.chart-section .ant-tabs-tab {
+  padding: 8px 16px;
+}
+
+.chart-section .ant-tabs-content {
+  height: 400px;
+}
+
+.chart-section .chart-container {
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .chart-section .ant-tabs-content {
+    height: 300px;
+  }
+} 

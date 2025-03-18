@@ -1,0 +1,192 @@
+/* 全局布局样式 */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-time);
+}
+
+/* 头部样式 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 32px;
+  margin-right: 12px;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.header-actions {
+  margin-left: auto;
+}
+
+/* 主内容区域 */
+.main-content {
+  flex: 1;
+  padding: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 页面标题 */
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.page-description {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* 卡片网格布局 */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* 数据卡片样式 */
+.data-card {
+  height: 100%;
+  transition: all var(--transition-time);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  margin-left: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.card-icon {
+  font-size: 24px;
+  color: var(--primary-color);
+}
+
+.change-indicator {
+  margin-top: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.change-indicator.positive {
+  color: var(--success-color);
+}
+
+.change-indicator.negative {
+  color: var(--error-color);
+}
+
+/* 图表卡片样式 */
+.chart-card {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+}
+
+.chart-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.action-icon {
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-secondary);
+  transition: color var(--transition-time);
+}
+
+.action-icon:hover {
+  color: var(--primary-color);
+}
+
+.chart-loading {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 时间筛选器样式 */
+.time-filter-container {
+  background-color: var(--card-background);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-color);
+}
+
+.quick-select {
+  margin-bottom: 16px;
+}
+
+.filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+} 
